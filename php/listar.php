@@ -9,8 +9,12 @@ função include()
     include_once(): o funcionamento dessa função é igual ao da função include(), porém, o arquivo só será importado caso o mesmo ainda não tenha sido.
 */
 
+ini_set('display_errors', 1); 
+ini_set('display_startup_errors', 1); 
+error_reporting(E_ALL);
+
 //Incluir o arquivo conexão.php
-include_once("conexao.php");
+include("conexao.php");
 
 //comando SQL
 $sql = "SELECT * FROM cursos";
@@ -31,19 +35,19 @@ while ($linha = mysqli_fetch_assoc($executar)) { //percorrendo o banco por linha
     é criar um array que representa a linha do dado retornado do banco de dados. Tem que ser chamada várias vezes. 
     Na primeira chamada, retorna a primeira linha como array, na segunda chamada, retorna a segunda linha como array.
     */
-    $cursos [$indice]['idCurso'] = $linha['idCurso'];
-    $cursos [$indice]['nomeCurso'] = $linha['nomeCurso'];
-    $cursos [$indice]['valorCurso'] = $linha['valorCurso'];
+    $cursos[$indice]['idCurso'] = $linha['idCurso'];
+    $cursos[$indice]['nomeCurso'] = $linha['nomeCurso'];
+    $cursos[$indice]['valorCurso'] = $linha['valorCurso'];
     $indice++;
 }
 
 /*JSON - Retorna uma string contendo a representação JSON do arquivo cursos. Se o parâmetro for um array ou objeto , ele será serializado 
 recursivamente. */
-json_encode(['cursos'=>$cursos]);
+json_encode(['cursos'=> $cursos]);
 
 
 //echo '<pre>';
-//var_dump($cursos);
+var_dump($cursos);
 /*
 var_dump -> tem um resultado semelhante semelhante ao print_r, mas para além dos valores apresenta também a informação 
 sobre o tipo de valores.
