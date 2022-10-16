@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -16,7 +16,8 @@ import { CursoComponent } from './curso/curso.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule, //Serve para criar o vínculo entre o Angular e o PHP para enviar ou receber os dados
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

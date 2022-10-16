@@ -1,7 +1,7 @@
 import { CursoService } from './curso.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Curso } from './curso';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Curso } from './modelo/curso';
 
 @Component({
   selector: 'app-curso',
@@ -9,37 +9,27 @@ import { Curso } from './curso';
   styleUrls: ['./curso.component.css']
 })
 export class CursoComponent implements OnInit {
-  url = "http://localhost/api/php/";
 
-  vetor:Curso [] = [];
+  // Objeto de formulario do tipo Curso
+ formulario = new FormGroup({
+  nomeCurso : new FormControl(''),
+  valorCurso : new FormControl('')
+ });
 
-  curso = new Curso();
+  vetor: Curso[] = [];
 
-  constructor(private curso_Servico:CursoService) { }
+  constructor(private curso_servico: CursoService) { }
 
   ngOnInit(): void {
-    this.selecao();
+    this.listar();
   }
 
-  cadastro():void{
-
+  cadastrar() {
+    this.curso_servico.cadastrar(this.formulario).subscribe(retorno => {this.vetor.push(retorno)});
   }
 
-  selecao():void{
-    this.curso_Servico.obterCursos().subscribe(
-      (res: Curso []) => {
-        this.vetor = res;
-        console.log(this.vetor);
-      }
-    )
-  }
-
-  alterar():void{
-
-  }
-
-  remover():void{
-
+  listar() {
+    this.curso_servico.listar().subscribe(dados => { this.vetor = dados });
   }
 
 
