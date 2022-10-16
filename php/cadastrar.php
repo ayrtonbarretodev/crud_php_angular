@@ -1,7 +1,6 @@
 <?php
-
 //Incluir a conexão
-include_once("conexao.php")
+include("conexao.php");
 
 //Obtendo os dados que vem do front com o Angular
 $obterDados = file_get_contents("php://input"); //vai ser manipulado em PHP e vem através de um INPUT
@@ -11,8 +10,8 @@ $obterDados = file_get_contents("php://input"); //vai ser manipulado em PHP e ve
 $extrair = json_decode($obterDados);
 
 //Separar os dados do JSON
-$nomeCurso = $extrair->cursos->nomeCurso;
-$valorCurso = $extrair->cursos->valorCurso;
+$nomeCurso = $extrair->nomeCurso;
+$valorCurso = $extrair->valorCurso;
 
 $sql = "INSERT INTO cursos (nomeCurso,valorCurso) VALUES ('$nomeCurso', $valorCurso)";
 mysqli_query($conexao,$sql); //executando a query
@@ -21,8 +20,9 @@ mysqli_query($conexao,$sql); //executando a query
 $curso = [
     'nomeCurso' => $nomeCurso,
     'valorCurso' => $valorCurso
-]
+];
 
-json_encode(['curso'] => $curso);
+echo json_encode($curso);
+
 
 ?>

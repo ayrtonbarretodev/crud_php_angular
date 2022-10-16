@@ -9,10 +9,6 @@ função include()
     include_once(): o funcionamento dessa função é igual ao da função include(), porém, o arquivo só será importado caso o mesmo ainda não tenha sido.
 */
 
-ini_set('display_errors', 1); 
-ini_set('display_startup_errors', 1); 
-error_reporting(E_ALL);
-
 //Incluir o arquivo conexão.php
 include("conexao.php");
 
@@ -43,11 +39,11 @@ while ($linha = mysqli_fetch_assoc($executar)) { //percorrendo o banco por linha
 
 /*JSON - Retorna uma string contendo a representação JSON do arquivo cursos. Se o parâmetro for um array ou objeto , ele será serializado 
 recursivamente. */
-json_encode(['cursos'=> $cursos]);
+echo json_encode($cursos);
 
 
 //echo '<pre>';
-var_dump($cursos);
+//var_dump($cursos);
 /*
 var_dump -> tem um resultado semelhante semelhante ao print_r, mas para além dos valores apresenta também a informação 
 sobre o tipo de valores.
